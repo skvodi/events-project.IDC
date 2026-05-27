@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+			<a href="/references.html">Справочники</a>
+			<h1>Панель администратора</h1>
+			<a href="/api/logout">Выйти</a>
+		</div>
+
+        <h2>Создание мероприятия</h2>
+        <form id="eventForm" class="event-form">
+            <input type="text" name="name" placeholder="Название" required>
+            <textarea name="description" placeholder="Описание" rows="3"></textarea>
+            <select name="city_id" required>
+                <option value="">Выберите город</option>
+            </select>
+            <input type="text" name="address" placeholder="Адрес">
+            <select name="category_id" required>
+                <option value="">Выберите категорию</option>
+            </select>
+            <input type="datetime-local" name="event_date" required>
+            <input type="datetime-local" name="registration_end" placeholder="Окончание регистрации">
+            <select name="option_ids" multiple size="4"></select>
+            <label class="file-upload-label">
+                <span>Загрузка фото</span>
+                <input type="file" name="photos" accept="image/*" multiple>
+            </label>
+            <label class="file-upload-label">
+                <span>Загрузка файлов</span>
+                <input type="file" name="files" multiple>
+            </label>
+            <input type="number" name="max_participants" placeholder="Макс. участников (необязательно)" min="1">
+            <button type="submit">Создать мероприятие</button>
+        </form>
+
+        <h2>Опции мероприятий</h2>
+        <form id="optionForm" class="event-form">
+            <input type="hidden" name="id">
+            <input type="text" name="name" placeholder="Название опции" required>
+            <select name="type_id" required></select>
+            <label class="checkbox-row">
+                <input type="checkbox" name="is_required">
+                <span>Обязательная опция</span>
+            </label>
+            <textarea name="display_params" placeholder="Параметры отображения" rows="2"></textarea>
+            <textarea name="values" placeholder="Значения для выбора, каждое с новой строки" rows="3"></textarea>
+            <div class="btn-row">
+                <button type="submit">Сохранить опцию</button>
+                <button type="button" class="btn-warning" onclick="resetOptionForm()">Очистить</button>
+            </div>
+        </form>
+        <div id="options"></div>
+
+        <h2>Список мероприятий</h2>
+        <div id="events"></div>
+    </div>
+    <script src="/js/admin.js"></script>
+</body>
+</html>
